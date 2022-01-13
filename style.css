@@ -1,4 +1,94 @@
 *{
     box-sizing: border-box;
     margin: 0;
+    font-family: Courier, monospace;
+}
+
+body{
+    background-color: #fefefe;
+    margin-top: 2rem;
+}
+
+#page{
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hflex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book-item{
+    background-color: #BBD6DC;
+    width: 45ch;
+    border-radius: 0.25rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h1,h2,p{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+h1{
+    font-weight: 400;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+h2{
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.title,.author{
+    margin-top:0.5rem;
+}
+
+.title{
+    margin-bottom: 1.5rem;
+}
+
+.author{
+    margin-bottom: 2rem;
+}
+
+p{
+    mix-blend-mode: multiply;
+    color:#539BB3;
+    text-transform: uppercase;
+}
+
+hr{
+    mix-blend-mode: multiply;
+    border: 1px solid #539BB3;
+}
+
+.thick-divider{
+    border: 3px solid #539BB3;
+}
+
+.key-name{
+    width: 50%;
+    mix-blend-mode: multiply;
+    border-right: 1px solid #539BB3;
+}
+
+.value{
+    text-transform: capitalize;
+    color: black;
+    mix-blend-mode: multiply;
+    border-left: 1px solid #539BB3;
+}
+
+.key-name,.value{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+button{
+    margin-left: auto;
+    padding:1rem;
 }
