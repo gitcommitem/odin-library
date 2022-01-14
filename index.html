@@ -14,6 +14,78 @@
             <h1>📖 Reading List</h1>
             <button>Add new book</button>
         </header>
+        <div class="hflex modal-cont">
+            <section class="modal">
+                <h1>Add a new book</h1>
+                <div class="title">
+                    <input type="text" name="title">
+                    <hr>
+                    <label for="title">Title</label>
+                </div>
+                <div class="author">
+                    <input type="text" name="author">
+                    <hr>
+                    <label for="author">Author</label>
+                </div>
+                <hr class="thick-divider">
+                <div class="hflex">
+                    <div class="hflex key-name">
+                        <label for="count">Number of</label>
+                        <div>
+                            <div>
+                                <input type="radio" name="pages">
+                                <label class="radio-label" for="pages">Pages</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="volumes">
+                                <label class="radio-label" for="volumes">Volumes</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <input type="text" name="count">
+                </div>
+                <hr>
+                <div class="hflex">
+                    <label class="key-name" for="language">Language</label>
+                    <input type="text" name="language" value="English">
+                </div>
+                <hr>
+                <div class="hflex">
+                    <label class="key-name" for="read-status">Read-Status</label>
+                    <div class="vflex">
+                        <div>
+                            <input type="radio" name="not-read-yet">
+                            <label class="radio-label" for="not-read-yet">Not read yet</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="reading">
+                            <label class="radio-label" for="reading">Reading</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="did-not-finish">
+                            <label class="radio-label" for="did-not-finish">Did not finish</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="finished">
+                            <label class="radio-label" for="finished">Finished</label>
+                        </div>
+                    </div>
+                </div>
+                <hr class="thick-divider">
+                <div id="card-color">
+                    <label>Card color</label>
+                    <input type="button" value="Blue">
+                    <input type="button" value="Yellow">
+                    <input type="button" value="Green">
+                    <input type="button" value="Red">
+                </div>
+                <div class="hflex footer">
+                    <button>Close without adding</button>
+                    <button>Add book</button>
+                </div>
+            </section>
+        </div>
         <section id="bookshelf">
         </section>
     </div>
