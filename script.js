@@ -1,18 +1,19 @@
 let bookList = [];
 
-function book(title,author,volumes,pages,language,read){
+function book(title,author,pages,volumes,language,readStatus,cardColor){
     this.title = title,
     this.author = author,
-    this.volumes = volumes,
     this.pages = pages,
+    this.volumes = volumes,
     this.language = language,
-    this.read = read
+    this.readStatus = readStatus,
+    this.cardColor = cardColor
 };
 
-const bananafish = new book("Bananafish","Akimi Yoshida","19",null,"Japanese","Completed");
-const yasha = new book("Yasha","Akimi Yoshida","12",null,"Japanese","Completed");
-const akira = new book("Akira","Katsuhiro Otomo","6",null,"Japanese","Completed");
-const iwata = new book("Iwata-San","Hobonichi Itoi Shinbun",null,"219","Japanese","Reading");
+const bananafish = new book("Bananafish","Akimi Yoshida",null,"19","Japanese","Finished","yellow");
+const yasha = new book("Yasha","Akimi Yoshida",null,"12","Japanese","Finished","blue");
+const akira = new book("Akira","Katsuhiro Otomo",null,"6","Japanese","Finished","green");
+const iwata = new book("Iwata-San","Hobonichi Itoi Shinbun","219",null,"Japanese","Reading","blue");
 
 function pushToBookList(book){
     bookList.push(book);
@@ -46,8 +47,9 @@ bookList.forEach(function(book){
     createDivider(cardEl);
     createInfoDiv(cardEl,"language",book.language);
     createDivider(cardEl);
-    createInfoDiv(cardEl,"read-status",book.read);
+    createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
+    addCardColor(cardEl,book);
     createEditDiv(cardEl);
 }
 );
@@ -122,6 +124,10 @@ function createEditDiv(cardEl){
     buttonEl.appendChild(buttonTxt);
 };
 
+function addCardColor(cardEl,book){
+    cardEl.classList.add(book.cardColor);
+}
+
 const modalDisplayButtonEl = document.querySelectorAll("button.modal-toggle");
 
 modalDisplayButtonEl.forEach(function(button){
@@ -138,5 +144,48 @@ function toggleModalDisplay(){
 const submitNewBookButtonEl = document.querySelector("button#add-book")
 
 submitNewBookButtonEl.addEventListener("click",function(){
+    let title = document.querySelector("input#title").value;
+    let author = document.querySelector("input#author").value;
+    
+    let hasPages = document.querySelector("input[name=count]:checked").value === "pages";
+    let pages = document.querySelector("input#count").value;
+    let volumes = document.querySelector("input#count").value;
+
+    hasPages ? volumes = null : pages = null;
+
+    let language = document.querySelector("input#language").value;
+    let readStatus = document.querySelector("input[name=read-status]:checked").value;
+    let cardColor = document.querySelector("input[name=card-color]:checked").value;
+
+    let newBook = new book(title,author,pages,volumes,language,readStatus,cardColor);
+    pushToBookList(newBook);
+    createNewBookCard(newBook);
     toggleModalDisplay();
 });
+
+function createNewBookCard(book){
+    let prevCard = bookshelfEl.firstChild;
+
+    const cardEl = document.createElement("div");
+    cardEl.classList.add("book-item");
+    bookshelfEl.insertBefore(cardEl,prevCard);
+
+    createHeroDiv(cardEl,"title","h1",book.title);
+    createHeroDiv(cardEl,"author","h2",book.author);
+    createThickDivider(cardEl);
+
+    if(book.pages === null){
+    createInfoDiv(cardEl,"volumes",book.volumes);
+    }
+    else{
+        createInfoDiv(cardEl,"pages",book.pages);
+    }
+
+    createDivider(cardEl);
+    createInfoDiv(cardEl,"language",book.language);
+    createDivider(cardEl);
+    createInfoDiv(cardEl,"read-status",book.readStatus);
+    createThickDivider(cardEl);
+    addCardColor(cardEl,book);
+    createEditDiv(cardEl);
+};

@@ -48,10 +48,25 @@ header h1{
 }
 
 .book-item{
-    background-color: #BBD6DC;
     width: 45ch;
     border-radius: 0.25rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.blue{
+    background-color: #BBD6DC;
+}
+
+.yellow{
+    background-color: #F3DF9D;
+}
+
+.green{
+    background-color: #C4DEC6;
+}
+
+.red{
+    background-color: #EAC0A2;
 }
 
 h1,h2,p{
@@ -185,7 +200,7 @@ button{
     margin-bottom: 1rem;
 }
 
-.footer{
+.modal-footer{
     justify-content: space-between;
     margin-bottom: 1rem;
 }

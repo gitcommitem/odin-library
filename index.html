@@ -34,11 +34,11 @@
                         <label for="count">Number of</label>
                         <div>
                             <div>
-                                <input type="radio" id="pages" name="count" checked>
+                                <input type="radio" id="pages" name="count" value="pages" checked>
                                 <label class="radio-label" for="pages">Pages</label>
                             </div>
                             <div>
-                                <input type="radio" id="volumes" name="count">
+                                <input type="radio" id="volumes" name="count" value="volumes">
                                 <label class="radio-label" for="volumes">Volumes</label>
                             </div>
                         </div>
@@ -56,19 +56,19 @@
                     <label class="key-name" for="read-status">Read-Status</label>
                     <div class="vflex">
                         <div>
-                            <input type="radio" id="not-read-yet" name="read-status" checked>
+                            <input type="radio" id="not-read-yet" name="read-status" value="Not Read Yet" checked>
                             <label class="radio-label" for="not-read-yet">Not read yet</label>
                         </div>
                         <div>
-                            <input type="radio" id="reading" name="read-status">
+                            <input type="radio" id="reading" name="read-status" value="Reading">
                             <label class="radio-label" for="reading">Reading</label>
                         </div>
                         <div>
-                            <input type="radio" id="did-not-finish" name="read-status">
+                            <input type="radio" id="did-not-finish" name="read-status" value="Did Not Finish">
                             <label class="radio-label" for="did-not-finish">Did not finish</label>
                         </div>
                         <div>
-                            <input type="radio" id="finished" name="read-status">
+                            <input type="radio" id="finished" name="read-status" value="Finished">
                             <label class="radio-label" for="finished">Finished</label>
                         </div>
                     </div>
@@ -76,17 +76,17 @@
                 <hr class="thick-divider">
                 <div id="card-color">
                     <label>Card color</label>
-                    <input type="radio" name="card-color" id="blue" checked>
+                    <input type="radio" name="card-color" id="blue" value="blue" checked>
                     <label class="radio-label" for="blue">Blue</label>
-                    <input type="radio" name="card-color" value="Yellow">
-                    <label class="radio-label" for="blue">Yellow</label>
-                    <input type="radio" name="card-color" value="Green">
-                    <label class="radio-label" for="blue">Green</label>
-                    <input type="radio" name="card-color" value="Red">
-                    <label class="radio-label" for="blue">Red</label>
+                    <input type="radio" name="card-color" id="yellow" value="yellow">
+                    <label class="radio-label" for="yellow">Yellow</label>
+                    <input type="radio" name="card-color" id="green" value="green">
+                    <label class="radio-label" for="green">Green</label>
+                    <input type="radio" name="card-color" id="red" value="red">
+                    <label class="radio-label" for="red">Red</label>
                 </div>
                 </form>
-                <div class="hflex footer">
+                <div class="hflex modal-footer">
                     <button class="modal-toggle">Close without adding</button>
                     <button id="add-book">Add book</button>
                 </div>
