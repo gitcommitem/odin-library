@@ -12,18 +12,19 @@
     <div id="page">
         <header class="hflex" id="add">
             <h1>📖 Reading List</h1>
-            <button>Add new book</button>
+            <button class="modal-toggle">Add new book</button>
         </header>
-        <div class="hflex modal-cont">
+        <div class="hflex modal-cont hidden" id="add-book-modal">
             <section class="modal">
                 <h1>Add a new book</h1>
+                <form>
                 <div class="title">
-                    <input type="text" name="title">
+                    <input type="text" id="title">
                     <hr>
                     <label for="title">Title</label>
                 </div>
                 <div class="author">
-                    <input type="text" name="author">
+                    <input type="text" id="author">
                     <hr>
                     <label for="author">Author</label>
                 </div>
@@ -33,41 +34,41 @@
                         <label for="count">Number of</label>
                         <div>
                             <div>
-                                <input type="radio" name="pages">
+                                <input type="radio" id="pages" name="count" checked>
                                 <label class="radio-label" for="pages">Pages</label>
                             </div>
                             <div>
-                                <input type="radio" name="volumes">
+                                <input type="radio" id="volumes" name="count">
                                 <label class="radio-label" for="volumes">Volumes</label>
                             </div>
                         </div>
                         
                     </div>
-                    <input type="text" name="count">
+                    <input type="text" id="count">
                 </div>
                 <hr>
                 <div class="hflex">
                     <label class="key-name" for="language">Language</label>
-                    <input type="text" name="language" value="English">
+                    <input type="text" id="language" value="English">
                 </div>
                 <hr>
                 <div class="hflex">
                     <label class="key-name" for="read-status">Read-Status</label>
                     <div class="vflex">
                         <div>
-                            <input type="radio" name="not-read-yet">
+                            <input type="radio" id="not-read-yet" name="read-status" checked>
                             <label class="radio-label" for="not-read-yet">Not read yet</label>
                         </div>
                         <div>
-                            <input type="radio" name="reading">
+                            <input type="radio" id="reading" name="read-status">
                             <label class="radio-label" for="reading">Reading</label>
                         </div>
                         <div>
-                            <input type="radio" name="did-not-finish">
+                            <input type="radio" id="did-not-finish" name="read-status">
                             <label class="radio-label" for="did-not-finish">Did not finish</label>
                         </div>
                         <div>
-                            <input type="radio" name="finished">
+                            <input type="radio" id="finished" name="read-status">
                             <label class="radio-label" for="finished">Finished</label>
                         </div>
                     </div>
@@ -75,14 +76,19 @@
                 <hr class="thick-divider">
                 <div id="card-color">
                     <label>Card color</label>
-                    <input type="button" value="Blue">
-                    <input type="button" value="Yellow">
-                    <input type="button" value="Green">
-                    <input type="button" value="Red">
+                    <input type="radio" name="card-color" id="blue" checked>
+                    <label class="radio-label" for="blue">Blue</label>
+                    <input type="radio" name="card-color" value="Yellow">
+                    <label class="radio-label" for="blue">Yellow</label>
+                    <input type="radio" name="card-color" value="Green">
+                    <label class="radio-label" for="blue">Green</label>
+                    <input type="radio" name="card-color" value="Red">
+                    <label class="radio-label" for="blue">Red</label>
                 </div>
+                </form>
                 <div class="hflex footer">
-                    <button>Close without adding</button>
-                    <button>Add book</button>
+                    <button class="modal-toggle">Close without adding</button>
+                    <button id="add-book">Add book</button>
                 </div>
             </section>
         </div>

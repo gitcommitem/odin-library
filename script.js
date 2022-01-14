@@ -121,3 +121,22 @@ function createEditDiv(cardEl){
     const buttonTxt = document.createTextNode("Edit");
     buttonEl.appendChild(buttonTxt);
 };
+
+const modalDisplayButtonEl = document.querySelectorAll("button.modal-toggle");
+
+modalDisplayButtonEl.forEach(function(button){
+button.addEventListener("click",function(){
+toggleModalDisplay();
+});
+});
+
+function toggleModalDisplay(){
+    const modalContEl = document.querySelector("div#add-book-modal");
+    modalContEl.classList.toggle("hidden");
+};
+
+const submitNewBookButtonEl = document.querySelector("button#add-book")
+
+submitNewBookButtonEl.addEventListener("click",function(){
+    toggleModalDisplay();
+});
