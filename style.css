@@ -70,6 +70,9 @@ header h1{
 }
 
 h1,h2,p{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: scroll;
     padding-left: 2rem;
     padding-right: 2rem;
 }
