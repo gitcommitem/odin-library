@@ -13,16 +13,20 @@ function book(title,author,pages,volumes,language,readStatus,cardColor){
 const bananafish = new book("Bananafish","Akimi Yoshida",null,"19","Japanese","Finished","yellow");
 const yasha = new book("Yasha","Akimi Yoshida",null,"12","Japanese","Finished","blue");
 const akira = new book("Akira","Katsuhiro Otomo",null,"6","Japanese","Finished","green");
-const iwata = new book("Iwata-San","Hobonichi Itoi Shinbun","219",null,"Japanese","Reading","blue");
+const iwata = new book("Iwata-San","Hobonichi Itoi Shinbun","219",null,"Japanese","Reading","green");
+const color = new book("Color and Light","James Gurney","222",null,"English","Finished","red");
+const morpho = new book("Morpho: Simplified Forms: Anatomy for Artists","Michel Lauricella","95",null,"English","Reading","blue");
+
+let preLoadedBooks = [akira,color,bananafish,yasha,iwata,morpho]
 
 function pushToBookList(book){
     bookList.push(book);
 };
 
-pushToBookList(akira);
-pushToBookList(bananafish);
-pushToBookList(yasha);
-pushToBookList(iwata);
+preLoadedBooks.forEach(function(book){
+    pushToBookList(book);
+});
+
 
 const bookshelfEl = document.querySelector("section#bookshelf");
 
@@ -49,7 +53,7 @@ bookList.forEach(function(book){
     createDivider(cardEl);
     createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
-    addCardColor(cardEl,book);
+    addCardColor(cardEl,book.cardColor);
     createEditDiv(cardEl);
 }
 );
@@ -124,8 +128,8 @@ function createEditDiv(cardEl){
     buttonEl.appendChild(buttonTxt);
 };
 
-function addCardColor(cardEl,book){
-    cardEl.classList.add(book.cardColor);
+function addCardColor(cardEl,objectValue){
+    cardEl.classList.add(objectValue);
 }
 
 const modalDisplayButtonEl = document.querySelectorAll("button.modal-toggle");
@@ -186,6 +190,6 @@ function createNewBookCard(book){
     createDivider(cardEl);
     createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
-    addCardColor(cardEl,book);
+    addCardColor(cardEl,book.cardColor);
     createEditDiv(cardEl);
 };
