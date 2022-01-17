@@ -32,9 +32,15 @@ const bookshelfEl = document.querySelector("section#bookshelf");
 
 bookList.forEach(function(book){
     let prevCard = bookshelfEl.firstChild;
+    let findBookTitle = (bookObject) => bookObject.title === book.title;
+    let indexOfBook = bookList.findIndex(findBookTitle);
 
     const cardEl = document.createElement("div");
     cardEl.classList.add("book-item");
+    const cardDataAtt = document.createAttribute("data-index")
+    cardDataAtt.value = `${indexOfBook}`;
+    cardEl.setAttributeNode(cardDataAtt);
+
     bookshelfEl.insertBefore(cardEl,prevCard);
 
     createHeroDiv(cardEl,"title","h1",book.title);
@@ -54,7 +60,7 @@ bookList.forEach(function(book){
     createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
     addCardColor(cardEl,book.cardColor);
-    createEditDiv(cardEl);
+    createEditDiv(cardEl,indexOfBook);
 }
 );
 
@@ -110,7 +116,7 @@ function createInfoDiv(cardEl,keyNameString,objectValue){
     valuePEl.appendChild(valueTxt);
 };
 
-function createEditDiv(cardEl){
+function createEditDiv(cardEl,indexOfBook){
     const contDivEl = document.createElement("div");
     contDivEl.classList.add("hflex","edit");
     cardEl.appendChild(contDivEl);
@@ -118,7 +124,7 @@ function createEditDiv(cardEl){
     const pEl = document.createElement("p");
     contDivEl.appendChild(pEl);
 
-    const bookCountTxt = document.createTextNode("No."+`${bookList.length}`);
+    const bookCountTxt = document.createTextNode("No."+`${indexOfBook + 1}`);
     pEl.appendChild(bookCountTxt);
 
     const buttonEl = document.createElement("button");
@@ -191,5 +197,5 @@ function createNewBookCard(book){
     createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
     addCardColor(cardEl,book.cardColor);
-    createEditDiv(cardEl);
+    createEditDiv(cardEl,book);
 };
