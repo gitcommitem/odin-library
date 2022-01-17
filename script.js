@@ -31,6 +31,10 @@ preLoadedBooks.forEach(function(book){
 const bookshelfEl = document.querySelector("section#bookshelf");
 
 bookList.forEach(function(book){
+   createNewBookCard(book);
+});
+
+function createNewBookCard(book){
     let prevCard = bookshelfEl.firstChild;
     let findBookTitle = (bookObject) => bookObject.title === book.title;
     let indexOfBook = bookList.findIndex(findBookTitle);
@@ -61,8 +65,7 @@ bookList.forEach(function(book){
     createThickDivider(cardEl);
     addCardColor(cardEl,book.cardColor);
     createEditDiv(cardEl,indexOfBook);
-}
-);
+};
 
 function createHeroDiv(cardEl,keyNameString,headingType,objectValue){
     const contDivEl = document.createElement("div");
@@ -172,36 +175,3 @@ submitNewBookButtonEl.addEventListener("click",function(){
     createNewBookCard(newBook);
     toggleModalDisplay();
 });
-
-function createNewBookCard(book){
-    let prevCard = bookshelfEl.firstChild;
-    let findBookTitle = (bookObject) => bookObject.title === book.title;
-    let indexOfBook = bookList.findIndex(findBookTitle);
-
-    const cardEl = document.createElement("div");
-    cardEl.classList.add("book-item");
-    const cardDataAtt = document.createAttribute("data-index")
-    cardDataAtt.value = `${indexOfBook}`;
-    cardEl.setAttributeNode(cardDataAtt);
-    
-    bookshelfEl.insertBefore(cardEl,prevCard);
-
-    createHeroDiv(cardEl,"title","h1",book.title);
-    createHeroDiv(cardEl,"author","h2",book.author);
-    createThickDivider(cardEl);
-
-    if(book.pages === null){
-    createInfoDiv(cardEl,"volumes",book.volumes);
-    }
-    else{
-        createInfoDiv(cardEl,"pages",book.pages);
-    }
-
-    createDivider(cardEl);
-    createInfoDiv(cardEl,"language",book.language);
-    createDivider(cardEl);
-    createInfoDiv(cardEl,"read-status",book.readStatus);
-    createThickDivider(cardEl);
-    addCardColor(cardEl,book.cardColor);
-    createEditDiv(cardEl,indexOfBook);
-};
