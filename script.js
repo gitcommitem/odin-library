@@ -175,9 +175,15 @@ submitNewBookButtonEl.addEventListener("click",function(){
 
 function createNewBookCard(book){
     let prevCard = bookshelfEl.firstChild;
+    let findBookTitle = (bookObject) => bookObject.title === book.title;
+    let indexOfBook = bookList.findIndex(findBookTitle);
 
     const cardEl = document.createElement("div");
     cardEl.classList.add("book-item");
+    const cardDataAtt = document.createAttribute("data-index")
+    cardDataAtt.value = `${indexOfBook}`;
+    cardEl.setAttributeNode(cardDataAtt);
+    
     bookshelfEl.insertBefore(cardEl,prevCard);
 
     createHeroDiv(cardEl,"title","h1",book.title);
@@ -197,5 +203,5 @@ function createNewBookCard(book){
     createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
     addCardColor(cardEl,book.cardColor);
-    createEditDiv(cardEl,book);
+    createEditDiv(cardEl,indexOfBook);
 };
