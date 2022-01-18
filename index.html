@@ -92,8 +92,87 @@
                 </div>
             </section>
         </div>
+        <div class="hflex modal-cont hidden" id="edit-book-modal">
+            <section class="modal">
+                <h1>Edit book</h1>
+                <form>
+                <div class="title">
+                    <input type="text" id="title">
+                    <hr>
+                    <label for="title">Title</label>
+                </div>
+                <div class="author">
+                    <input type="text" id="author">
+                    <hr>
+                    <label for="author">Author</label>
+                </div>
+                <hr class="thick-divider">
+                <div class="hflex">
+                    <div class="hflex key-name">
+                        <label for="count">Number of</label>
+                        <div>
+                            <div>
+                                <input type="radio" id="pages" name="count" value="pages" checked>
+                                <label class="radio-label" for="pages">Pages</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="volumes" name="count" value="volumes">
+                                <label class="radio-label" for="volumes">Volumes</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <input type="text" id="count">
+                </div>
+                <hr>
+                <div class="hflex">
+                    <label class="key-name" for="language">Language</label>
+                    <input type="text" id="language" value="English">
+                </div>
+                <hr>
+                <div class="hflex">
+                    <label class="key-name" for="read-status">Read-Status</label>
+                    <div class="vflex">
+                        <div>
+                            <input type="radio" id="not-read-yet" name="read-status" value="Not Read Yet" checked>
+                            <label class="radio-label" for="not-read-yet">Not read yet</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="reading" name="read-status" value="Reading">
+                            <label class="radio-label" for="reading">Reading</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="did-not-finish" name="read-status" value="Did Not Finish">
+                            <label class="radio-label" for="did-not-finish">Did not finish</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="finished" name="read-status" value="Finished">
+                            <label class="radio-label" for="finished">Finished</label>
+                        </div>
+                    </div>
+                </div>
+                <hr class="thick-divider">
+                <div id="card-color">
+                    <label>Card color</label>
+                    <input type="radio" name="card-color" id="blue" value="blue" checked>
+                    <label class="radio-label" for="blue">Blue</label>
+                    <input type="radio" name="card-color" id="yellow" value="yellow">
+                    <label class="radio-label" for="yellow">Yellow</label>
+                    <input type="radio" name="card-color" id="green" value="green">
+                    <label class="radio-label" for="green">Green</label>
+                    <input type="radio" name="card-color" id="red" value="red">
+                    <label class="radio-label" for="red">Red</label>
+                </div>
+                </form>
+                <div class="hflex modal-footer">
+                    <button class="modal-toggle edit">Close without editing</button>
+                    <button id="edit-book">Edit book</button>
+                </div>
+            </section>
+        </div>
         <section id="bookshelf">
         </section>
+
     </div>
 </body>
 </html>

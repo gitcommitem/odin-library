@@ -145,16 +145,20 @@ const modalDisplayButtonEl = document.querySelectorAll("button.modal-toggle");
 
 modalDisplayButtonEl.forEach(function(button){
 button.addEventListener("click",function(){
-toggleModalDisplay();
+
+const isEditModalButton = button.classList.contains("edit");
+
+isEditModalButton ? toggleModalDisplay("div#edit-book-modal") : toggleModalDisplay("div#add-book-modal");
+
 });
 });
 
-function toggleModalDisplay(){
-    const modalContEl = document.querySelector("div#add-book-modal");
+function toggleModalDisplay(modalId){
+    const modalContEl = document.querySelector(modalId);
     modalContEl.classList.toggle("hidden");
 };
 
-const submitNewBookButtonEl = document.querySelector("button#add-book")
+const submitNewBookButtonEl = document.querySelector("button#add-book");
 
 submitNewBookButtonEl.addEventListener("click",function(){
     let title = document.querySelector("input#title").value;
@@ -173,5 +177,13 @@ submitNewBookButtonEl.addEventListener("click",function(){
     let newBook = new book(title,author,pages,volumes,language,readStatus,cardColor);
     pushToBookList(newBook);
     createNewBookCard(newBook);
-    toggleModalDisplay();
+    toggleModalDisplay("div#add-book-modal");
+});
+
+const editBookButtonEl = document.querySelectorAll(".edit button");
+
+editBookButtonEl.forEach(function(button){
+    button.addEventListener("click",function(){
+        toggleModalDisplay("div#edit-book-modal");
+    });
 });
