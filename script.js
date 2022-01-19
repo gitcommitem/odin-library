@@ -36,14 +36,9 @@ bookList.forEach(function(book){
 
 function createNewBookCard(book){
     let prevCard = bookshelfEl.firstChild;
-    let findBookTitle = (bookObject) => bookObject.title === book.title;
-    let indexOfBook = bookList.findIndex(findBookTitle);
 
     const cardEl = document.createElement("div");
     cardEl.classList.add("book-item");
-    const cardDataAtt = document.createAttribute("data-index")
-    cardDataAtt.value = `${indexOfBook}`;
-    cardEl.setAttributeNode(cardDataAtt);
 
     bookshelfEl.insertBefore(cardEl,prevCard);
 
@@ -64,7 +59,7 @@ function createNewBookCard(book){
     createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
     addCardColor(cardEl,book.cardColor);
-    createEditDiv(cardEl,indexOfBook);
+    createEditDiv(cardEl,book);
 };
 
 function createHeroDiv(cardEl,keyNameString,headingType,objectValue){
@@ -119,7 +114,10 @@ function createInfoDiv(cardEl,keyNameString,objectValue){
     valuePEl.appendChild(valueTxt);
 };
 
-function createEditDiv(cardEl,indexOfBook){
+function createEditDiv(cardEl,book){
+    let findBookTitle = (bookObject) => bookObject.title === book.title;
+    let indexOfBook = bookList.findIndex(findBookTitle);
+
     const contDivEl = document.createElement("div");
     contDivEl.classList.add("hflex","edit");
     cardEl.appendChild(contDivEl);
@@ -135,6 +133,10 @@ function createEditDiv(cardEl,indexOfBook){
 
     const buttonTxt = document.createTextNode("Edit");
     buttonEl.appendChild(buttonTxt);
+
+    const buttonDataAtt = document.createAttribute("data-index")
+    buttonDataAtt.value = `${indexOfBook}`;
+    buttonEl.setAttributeNode(buttonDataAtt);
 };
 
 function addCardColor(cardEl,objectValue){
@@ -184,6 +186,50 @@ const editBookButtonEl = document.querySelectorAll(".edit button");
 
 editBookButtonEl.forEach(function(button){
     button.addEventListener("click",function(){
+        getBookData(button);
         toggleModalDisplay("div#edit-book-modal");
     });
 });
+
+function getBookData(button){
+    let index = button.dataset.index;
+
+    let title = bookList[index].title;
+    let author = bookList[index].author;
+    let pages = bookList[index].pages;
+    let volumes = bookList[index].volumes;
+    let language = bookList[index].language;
+    let readStatus = bookList[index].readStatus;
+    let cardColor = bookList[index].cardColor;
+
+    const titleInputEl = document.querySelector("#edit-book-modal input#title")
+    titleInputEl.value = title;
+
+    const authorInputEl = document.querySelector("#edit-book-modal input#author")
+    authorInputEl.value = author;
+
+    if(pages === null){
+        const pageOrVolInputEl = document.querySelector("#edit-book-modal input[value=volumes][name=count]")
+        pageOrVolInputEl.checked = true;
+
+        const volumesInputEl = document.querySelector("#edit-book-modal input#count")
+        volumesInputEl.value = volumes;
+    }
+    else{
+        const pageOrVolInputEl = document.querySelector("#edit-book-modal input[value=pages][name=count]")
+        pageOrVolInputEl.checked = true;
+
+        const pagesInputEl = document.querySelector("#edit-book-modal input#count")
+        pagesInputEl.value = pages;
+    };
+    
+    const languageInputEl = document.querySelector("#edit-book-modal input#language")
+    languageInputEl.value = language;
+
+    const readStatusInputEl = document.querySelector(`#edit-book-modal input[value=${readStatus}][name=read-status]`)
+    readStatusInputEl.checked = true;
+
+    const cardColorInputEl = document.querySelector(`#edit-book-modal input[value=${cardColor}][name=card-color]`)
+    cardColorInputEl.checked = true;
+   
+};
