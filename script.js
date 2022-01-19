@@ -228,7 +228,7 @@ function getBookData(button){
     const languageInputEl = document.querySelector("#edit-book-modal input#language")
     languageInputEl.value = language;
 
-    const readStatusInputEl = document.querySelector(`#edit-book-modal input[value=${readStatus}][name=read-status]`)
+    const readStatusInputEl = document.querySelector(`#edit-book-modal input[value="${readStatus}"][name=read-status]`)
     readStatusInputEl.checked = true;
 
     const cardColorInputEl = document.querySelector(`#edit-book-modal input[value=${cardColor}][name=card-color]`)
