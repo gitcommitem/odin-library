@@ -129,6 +129,7 @@ function createEditDiv(cardEl,book){
     pEl.appendChild(bookCountTxt);
 
     const buttonEl = document.createElement("button");
+    buttonEl.classList.add("edit-button");
     contDivEl.appendChild(buttonEl);
 
     const buttonTxt = document.createTextNode("Edit");
@@ -182,13 +183,14 @@ submitNewBookButtonEl.addEventListener("click",function(){
     toggleModalDisplay("div#add-book-modal");
 });
 
-const editBookButtonEl = document.querySelectorAll(".edit button");
-
-editBookButtonEl.forEach(function(button){
-    button.addEventListener("click",function(){
+bookshelfEl.addEventListener("click",function(event){
+    let editButtonEl = event.target.classList.contains("edit-button");
+    let button = event.target;
+    console.log(event.target);
+    if(editButtonEl){
         getBookData(button);
         toggleModalDisplay("div#edit-book-modal");
-    });
+    }
 });
 
 function getBookData(button){
