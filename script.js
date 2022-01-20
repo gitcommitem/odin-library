@@ -128,11 +128,16 @@ function createEditDiv(cardEl,book){
     const bookCountTxt = document.createTextNode("No."+`${indexOfBook + 1}`);
     pEl.appendChild(bookCountTxt);
 
+    createButtonEl("delete-button","Delete",indexOfBook,contDivEl);
+    createButtonEl("edit-button","Edit",indexOfBook,contDivEl);
+};
+
+function createButtonEl(className,textString,indexOfBook,contDivEl){
     const buttonEl = document.createElement("button");
-    buttonEl.classList.add("edit-button");
+    buttonEl.classList.add(className);
     contDivEl.appendChild(buttonEl);
 
-    const buttonTxt = document.createTextNode("Edit");
+    const buttonTxt = document.createTextNode(textString);
     buttonEl.appendChild(buttonTxt);
 
     const buttonDataAtt = document.createAttribute("data-index")
@@ -184,14 +189,39 @@ submitNewBookButtonEl.addEventListener("click",function(){
 });
 
 bookshelfEl.addEventListener("click",function(event){
+    let deleteButtonEl = event.target.classList.contains("delete-button");
     let editButtonEl = event.target.classList.contains("edit-button");
     let button = event.target;
-    console.log(event.target);
+
+    if(deleteButtonEl){
+        deleteBook(button);
+        updateBookShelf();
+    }
+
     if(editButtonEl){
         getBookData(button);
         toggleModalDisplay("div#edit-book-modal");
     }
 });
+
+function deleteBook(button){
+    let index = button.dataset.index;
+
+    bookList.splice(index,1);
+    console.log(bookList);
+};
+
+function updateBookShelf(){
+    let bookCardEl = document.querySelectorAll("div.book-item")
+    bookCardEl.forEach(function(card){
+        card.remove();
+     });
+
+    bookList.forEach(function(book){
+        createNewBookCard(book);
+     });
+
+};
 
 function getBookData(button){
     let index = button.dataset.index;
