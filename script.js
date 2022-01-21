@@ -185,6 +185,12 @@ submitNewBookButtonEl.addEventListener("click",function(){
     let newBook = new book(title,author,pages,volumes,language,readStatus,cardColor);
     pushToBookList(newBook);
     createNewBookCard(newBook);
+    document.querySelector("div#add-book-modal form").reset();
+    
+    if(bookList.length ===1){
+        document.querySelector("p.empty-state").remove();
+     };
+
     toggleModalDisplay("div#add-book-modal");
 });
 
@@ -220,6 +226,16 @@ function updateBookShelf(){
     bookList.forEach(function(book){
         createNewBookCard(book);
      });
+
+     const emptyBookshelf = bookList.length === 0;
+     if(emptyBookshelf){
+        const pEl = document.createElement("p");
+        pEl.classList.add("empty-state")
+        bookshelfEl.appendChild(pEl);
+    
+        const pTxt = document.createTextNode("No books yet.");
+        pEl.appendChild(pTxt);
+     };
 
 };
 
