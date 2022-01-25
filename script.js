@@ -166,9 +166,9 @@ function toggleModalDisplay(modalId){
     modalContEl.classList.toggle("hidden");
 };
 
-const submitNewBookButtonEl = document.querySelector("button#add-book");
+const AddBookSubmitButtonEl = document.querySelector("button#add-book");
 
-submitNewBookButtonEl.addEventListener("click",function(){
+AddBookSubmitButtonEl.addEventListener("click",function(){
     let title = document.querySelector("input#title").value;
     let author = document.querySelector("input#author").value;
     
@@ -206,6 +206,7 @@ bookshelfEl.addEventListener("click",function(event){
 
     if(editButtonEl){
         getBookData(button);
+        attachIndexToSubmitButton(button);
         toggleModalDisplay("div#edit-book-modal");
     }
 });
@@ -280,4 +281,36 @@ function getBookData(button){
     const cardColorInputEl = document.querySelector(`#edit-book-modal input[value=${cardColor}][name=card-color]`)
     cardColorInputEl.checked = true;
    
+};
+
+const editBookSubmitButtonEl = document.querySelector("#edit-book-modal button#edit-book");
+
+function attachIndexToSubmitButton(button){
+    let index = button.dataset.index;
+    editBookSubmitButtonEl.dataset.index = index;
+};
+
+editBookSubmitButtonEl.addEventListener("click",function(){
+    let index = editBookSubmitButtonEl.dataset.index
+    updateBookData(index);
+    toggleModalDisplay("div#edit-book-modal");
+});
+
+function updateBookData(index){
+    let updatedTitle = document.querySelector("#edit-book-modal input#title").value;
+    let updatedAuthor = document.querySelector("#edit-book-modal input#author").value;
+    
+    let hasPages = document.querySelector("#edit-book-modal input[name=count]:checked").value === "pages";
+    let updatedPages = document.querySelector("#edit-book-modal input#count").value;
+    let updatedVolumes = document.querySelector("#edit-book-modal input#count").value;
+
+    hasPages ? updatedVolumes = null : updatedPages = null;
+
+    let updatedLanguage = document.querySelector("#edit-book-modal input#language").value;
+    let updatedReadStatus = document.querySelector("#edit-book-modal input[name=read-status]:checked").value;
+    let updatedCardColor = document.querySelector("#edit-book-modal input[name=card-color]:checked").value;
+
+    let updatedBook = new book(updatedTitle,updatedAuthor,updatedPages,updatedVolumes,updatedLanguage,updatedReadStatus,updatedCardColor);
+
+    bookList.splice(index,1,updatedBook);
 };
