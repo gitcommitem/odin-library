@@ -37,8 +37,15 @@ bookList.forEach(function(book){
 function createNewBookCard(book){
     let prevCard = bookshelfEl.firstChild;
 
+    let findBookTitle = (bookObject) => bookObject.title === book.title;
+    let indexOfBook = bookList.findIndex(findBookTitle);
+
     const cardEl = document.createElement("div");
     cardEl.classList.add("book-item");
+
+    const indexDataAtt = document.createAttribute("data-index")
+    indexDataAtt.value = `${indexOfBook}`;
+    cardEl.setAttributeNode(indexDataAtt);
 
     bookshelfEl.insertBefore(cardEl,prevCard);
 
@@ -59,7 +66,7 @@ function createNewBookCard(book){
     createInfoDiv(cardEl,"read-status",book.readStatus);
     createThickDivider(cardEl);
     addCardColor(cardEl,book.cardColor);
-    createEditDiv(cardEl,book);
+    createEditDiv(cardEl,indexOfBook);
 };
 
 function createHeroDiv(cardEl,keyNameString,headingType,objectValue){
@@ -114,10 +121,7 @@ function createInfoDiv(cardEl,keyNameString,objectValue){
     valuePEl.appendChild(valueTxt);
 };
 
-function createEditDiv(cardEl,book){
-    let findBookTitle = (bookObject) => bookObject.title === book.title;
-    let indexOfBook = bookList.findIndex(findBookTitle);
-
+function createEditDiv(cardEl,indexOfBook){
     const contDivEl = document.createElement("div");
     contDivEl.classList.add("hflex","edit");
     cardEl.appendChild(contDivEl);
@@ -293,6 +297,7 @@ function attachIndexToSubmitButton(button){
 editBookSubmitButtonEl.addEventListener("click",function(){
     let index = editBookSubmitButtonEl.dataset.index
     updateBookData(index);
+    updateBookCard(index);
     toggleModalDisplay("div#edit-book-modal");
 });
 
@@ -313,4 +318,67 @@ function updateBookData(index){
     let updatedBook = new book(updatedTitle,updatedAuthor,updatedPages,updatedVolumes,updatedLanguage,updatedReadStatus,updatedCardColor);
 
     bookList.splice(index,1,updatedBook);
+};
+
+function updateBookCard(index){
+    let titleH1El = document.querySelector(`div.book-item[data-index="${index}"] div.title h1`);
+    let updatedTitle = bookList[index].title;
+
+    let authorH2El = document.querySelector(`div.book-item[data-index="${index}"] div.author h2`);
+    let updatedAuthor = bookList[index].author;
+
+    let hasPages = bookList[index].pages !== null;
+
+    let languagePEl = document.querySelector(`div.book-item[data-index="${index}"] div.language p.value`);
+    let updatedLanguage = bookList[index].language;
+
+    let readStatusPEl = document.querySelector(`div.book-item[data-index="${index}"] div.read-status p.value`);
+    let updatedReadStatus = bookList[index].readStatus;
+
+    let cardEl = document.querySelector(`div.book-item[data-index="${index}"]`);
+    let cardColorClassList = ["blue","yellow","green","red"];
+    let updatedCardColor = bookList[index].cardColor;
+
+    titleH1El.textContent = updatedTitle;
+    authorH2El.textContent = updatedAuthor;
+
+    if(hasPages){
+        let countDivEl = document.querySelector(`div.book-item[data-index="${index}"] div.hflex`)
+        let noPagesClass = countDivEl.classList.contains("pages") === false;
+
+        if(noPagesClass){
+            countDivEl.classList.remove("volumes");
+            countDivEl.classList.add("pages");
+            let keyNamePEl = document.querySelector(`div.book-item[data-index="${index}"] div.pages p.key-name`);
+            keyNamePEl.textContent = "pages"
+        }
+
+        let pageCountPEl = document.querySelector(`div.book-item[data-index="${index}"] div.pages p.value`);
+        let updatedPages = bookList[index].pages;
+
+        pageCountPEl.textContent = updatedPages;
+        
+    }
+    else{
+        let countDivEl = document.querySelector(`div.book-item[data-index="${index}"] div.hflex`)
+        let noVolumesClass = countDivEl.classList.contains("volumes") === false;
+
+        if(noVolumesClass){
+            countDivEl.classList.remove("pages");
+            countDivEl.classList.add("volumes");
+            let keyNamePEl = document.querySelector(`div.book-item[data-index="${index}"] div.volumes p.key-name`);
+            keyNamePEl.textContent = "volumes"
+        }
+
+        let volumeCountPEl = document.querySelector(`div.book-item[data-index="${index}"] div.volumes p.value`);
+        let updatedVolumes = bookList[index].volumes;
+
+        volumeCountPEl.textContent = updatedVolumes;
+    };
+    
+    languagePEl.textContent = updatedLanguage;
+    readStatusPEl.textContent = updatedReadStatus;
+
+    cardEl.classList.remove(...cardColorClassList);
+    cardEl.classList.add(updatedCardColor);
 };
