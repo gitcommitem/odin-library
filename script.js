@@ -326,24 +326,13 @@ function updateBookData(index){
 function updateBookCard(index){
     let titleH1El = document.querySelector(`div.book-item[data-index="${index}"] div.title h1`);
     let updatedTitle = bookList[index].title;
+    titleH1El.textContent = updatedTitle;
 
     let authorH2El = document.querySelector(`div.book-item[data-index="${index}"] div.author h2`);
     let updatedAuthor = bookList[index].author;
+    authorH2El.textContent = updatedAuthor;
 
     let hasPages = bookList[index].pages !== null;
-
-    let languagePEl = document.querySelector(`div.book-item[data-index="${index}"] div.language p.value`);
-    let updatedLanguage = bookList[index].language;
-
-    let readStatusPEl = document.querySelector(`div.book-item[data-index="${index}"] div.read-status p.value`);
-    let updatedReadStatus = bookList[index].readStatus;
-
-    let cardEl = document.querySelector(`div.book-item[data-index="${index}"]`);
-    let cardColorClassList = ["blue","yellow","green","red"];
-    let updatedCardColor = bookList[index].cardColor;
-
-    titleH1El.textContent = updatedTitle;
-    authorH2El.textContent = updatedAuthor;
 
     if(hasPages){
         let countDivEl = document.querySelector(`div.book-item[data-index="${index}"] div.hflex`);
@@ -378,10 +367,18 @@ function updateBookCard(index){
 
         volumeCountPEl.textContent = updatedVolumes;
     };
-    
+
+    let languagePEl = document.querySelector(`div.book-item[data-index="${index}"] div.language p.value`);
+    let updatedLanguage = bookList[index].language;
     languagePEl.textContent = updatedLanguage;
+
+    let readStatusPEl = document.querySelector(`div.book-item[data-index="${index}"] div.read-status p.value`);
+    let updatedReadStatus = bookList[index].readStatus;
     readStatusPEl.textContent = updatedReadStatus;
 
+    let cardEl = document.querySelector(`div.book-item[data-index="${index}"]`);
+    let cardColorClassList = ["blue","yellow","green","red"];
+    let updatedCardColor = bookList[index].cardColor;
     cardEl.classList.remove(...cardColorClassList);
     cardEl.classList.add(updatedCardColor);
 };
