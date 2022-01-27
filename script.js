@@ -17,7 +17,7 @@ const iwata = new book("Iwata-San","Hobonichi Itoi Shinbun","219",null,"Japanese
 const color = new book("Color and Light","James Gurney","222",null,"English","Finished","red");
 const morpho = new book("Morpho: Simplified Forms: Anatomy for Artists","Michel Lauricella","95",null,"English","Reading","blue");
 
-let preLoadedBooks = [akira,color,bananafish,yasha,iwata,morpho]
+let preLoadedBooks = [akira,color,bananafish,yasha,iwata,morpho];
 
 function pushToBookList(book){
     bookList.push(book);
@@ -56,7 +56,7 @@ function createNewBookCard(book){
     }
     else{
         createInfoDiv(cardEl,"pages",book.pages);
-    }
+    };
 
     createDivider(cardEl);
     createInfoDiv(cardEl,"language",book.language);
@@ -68,7 +68,7 @@ function createNewBookCard(book){
 };
 
 function createIndexDataAtt(targetEl,indexOfBook){
-    const indexDataAtt = document.createAttribute("data-index")
+    const indexDataAtt = document.createAttribute("data-index");
     indexDataAtt.value = `${indexOfBook}`;
     targetEl.setAttributeNode(indexDataAtt);
 };
@@ -111,7 +111,7 @@ function createInfoDiv(cardEl,keyNameString,objectValue){
     cardEl.appendChild(contDivEl);
 
     const labelPEl = document.createElement("p");
-    labelPEl.classList.add("key-name")
+    labelPEl.classList.add("key-name");
     contDivEl.appendChild(labelPEl);
 
     const labelTxt = document.createTextNode(keyNameString);
@@ -153,16 +153,16 @@ function createButtonEl(className,textString,indexOfBook,contDivEl){
 
 function addCardColor(cardEl,objectValue){
     cardEl.classList.add(objectValue);
-}
+};
 
 const modalDisplayButtonEl = document.querySelectorAll("button.modal-toggle");
 
 modalDisplayButtonEl.forEach(function(button){
-button.addEventListener("click",function(){
+    button.addEventListener("click",function(){
 
-const isEditModalButton = button.classList.contains("edit");
+    const isEditModalButton = button.classList.contains("edit");
 
-isEditModalButton ? toggleModalDisplay("div#edit-book-modal") : toggleModalDisplay("div#add-book-modal");
+    isEditModalButton ? toggleModalDisplay("div#edit-book-modal") : toggleModalDisplay("div#add-book-modal");
 
 });
 });
@@ -189,11 +189,12 @@ AddBookSubmitButtonEl.addEventListener("click",function(){
     let cardColor = document.querySelector("input[name=card-color]:checked").value;
 
     let newBook = new book(title,author,pages,volumes,language,readStatus,cardColor);
+
     pushToBookList(newBook);
     createNewBookCard(newBook);
     document.querySelector("div#add-book-modal form").reset();
     
-    if(bookList.length ===1){
+    if(bookList.length === 1){
         document.querySelector("p.empty-state").remove();
      };
 
@@ -208,24 +209,23 @@ bookshelfEl.addEventListener("click",function(event){
     if(deleteButtonEl){
         deleteBook(button);
         updateBookShelf();
-    }
+    };
 
     if(editButtonEl){
         getBookData(button);
         attachIndexToSubmitButton(button);
         toggleModalDisplay("div#edit-book-modal");
-    }
+    };
 });
 
 function deleteBook(button){
     let index = button.dataset.index;
-
     bookList.splice(index,1);
-    console.log(bookList);
 };
 
 function updateBookShelf(){
-    let bookCardEl = document.querySelectorAll("div.book-item")
+    let bookCardEl = document.querySelectorAll("div.book-item");
+
     bookCardEl.forEach(function(card){
         card.remove();
      });
@@ -235,9 +235,10 @@ function updateBookShelf(){
      });
 
      const emptyBookshelf = bookList.length === 0;
+
      if(emptyBookshelf){
         const pEl = document.createElement("p");
-        pEl.classList.add("empty-state")
+        pEl.classList.add("empty-state");
         bookshelfEl.appendChild(pEl);
     
         const pTxt = document.createTextNode("No books yet.");
@@ -257,34 +258,34 @@ function getBookData(button){
     let readStatus = bookList[index].readStatus;
     let cardColor = bookList[index].cardColor;
 
-    const titleInputEl = document.querySelector("#edit-book-modal input#title")
+    const titleInputEl = document.querySelector("#edit-book-modal input#title");
     titleInputEl.value = title;
 
-    const authorInputEl = document.querySelector("#edit-book-modal input#author")
+    const authorInputEl = document.querySelector("#edit-book-modal input#author");
     authorInputEl.value = author;
 
     if(pages === null){
-        const pageOrVolInputEl = document.querySelector("#edit-book-modal input[value=volumes][name=count]")
+        const pageOrVolInputEl = document.querySelector("#edit-book-modal input[value=volumes][name=count]");
         pageOrVolInputEl.checked = true;
 
-        const volumesInputEl = document.querySelector("#edit-book-modal input#count")
+        const volumesInputEl = document.querySelector("#edit-book-modal input#count");
         volumesInputEl.value = volumes;
     }
     else{
-        const pageOrVolInputEl = document.querySelector("#edit-book-modal input[value=pages][name=count]")
+        const pageOrVolInputEl = document.querySelector("#edit-book-modal input[value=pages][name=count]");
         pageOrVolInputEl.checked = true;
 
-        const pagesInputEl = document.querySelector("#edit-book-modal input#count")
+        const pagesInputEl = document.querySelector("#edit-book-modal input#count");
         pagesInputEl.value = pages;
     };
     
-    const languageInputEl = document.querySelector("#edit-book-modal input#language")
+    const languageInputEl = document.querySelector("#edit-book-modal input#language");
     languageInputEl.value = language;
 
-    const readStatusInputEl = document.querySelector(`#edit-book-modal input[value="${readStatus}"][name=read-status]`)
+    const readStatusInputEl = document.querySelector(`#edit-book-modal input[value="${readStatus}"][name=read-status]`);
     readStatusInputEl.checked = true;
 
-    const cardColorInputEl = document.querySelector(`#edit-book-modal input[value=${cardColor}][name=card-color]`)
+    const cardColorInputEl = document.querySelector(`#edit-book-modal input[value=${cardColor}][name=card-color]`);
     cardColorInputEl.checked = true;
    
 };
@@ -297,7 +298,7 @@ function attachIndexToSubmitButton(button){
 };
 
 editBookSubmitButtonEl.addEventListener("click",function(){
-    let index = editBookSubmitButtonEl.dataset.index
+    let index = editBookSubmitButtonEl.dataset.index;
     updateBookData(index);
     updateBookCard(index);
     toggleModalDisplay("div#edit-book-modal");
@@ -345,32 +346,32 @@ function updateBookCard(index){
     authorH2El.textContent = updatedAuthor;
 
     if(hasPages){
-        let countDivEl = document.querySelector(`div.book-item[data-index="${index}"] div.hflex`)
+        let countDivEl = document.querySelector(`div.book-item[data-index="${index}"] div.hflex`);
         let noPagesClass = countDivEl.classList.contains("pages") === false;
 
         if(noPagesClass){
             countDivEl.classList.remove("volumes");
             countDivEl.classList.add("pages");
             let keyNamePEl = document.querySelector(`div.book-item[data-index="${index}"] div.pages p.key-name`);
-            keyNamePEl.textContent = "pages"
-        }
+            keyNamePEl.textContent = "pages";
+        };
 
         let pageCountPEl = document.querySelector(`div.book-item[data-index="${index}"] div.pages p.value`);
         let updatedPages = bookList[index].pages;
 
         pageCountPEl.textContent = updatedPages;
-        
+
     }
     else{
-        let countDivEl = document.querySelector(`div.book-item[data-index="${index}"] div.hflex`)
+        let countDivEl = document.querySelector(`div.book-item[data-index="${index}"] div.hflex`);
         let noVolumesClass = countDivEl.classList.contains("volumes") === false;
 
         if(noVolumesClass){
             countDivEl.classList.remove("pages");
             countDivEl.classList.add("volumes");
             let keyNamePEl = document.querySelector(`div.book-item[data-index="${index}"] div.volumes p.key-name`);
-            keyNamePEl.textContent = "volumes"
-        }
+            keyNamePEl.textContent = "volumes";
+        };
 
         let volumeCountPEl = document.querySelector(`div.book-item[data-index="${index}"] div.volumes p.value`);
         let updatedVolumes = bookList[index].volumes;
