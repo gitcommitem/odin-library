@@ -43,9 +43,7 @@ function createNewBookCard(book){
     const cardEl = document.createElement("div");
     cardEl.classList.add("book-item");
 
-    const indexDataAtt = document.createAttribute("data-index")
-    indexDataAtt.value = `${indexOfBook}`;
-    cardEl.setAttributeNode(indexDataAtt);
+    createIndexDataAtt(cardEl,indexOfBook);
 
     bookshelfEl.insertBefore(cardEl,prevCard);
 
@@ -67,6 +65,12 @@ function createNewBookCard(book){
     createThickDivider(cardEl);
     addCardColor(cardEl,book.cardColor);
     createEditDiv(cardEl,indexOfBook);
+};
+
+function createIndexDataAtt(targetEl,indexOfBook){
+    const indexDataAtt = document.createAttribute("data-index")
+    indexDataAtt.value = `${indexOfBook}`;
+    targetEl.setAttributeNode(indexDataAtt);
 };
 
 function createHeroDiv(cardEl,keyNameString,headingType,objectValue){
@@ -144,9 +148,7 @@ function createButtonEl(className,textString,indexOfBook,contDivEl){
     const buttonTxt = document.createTextNode(textString);
     buttonEl.appendChild(buttonTxt);
 
-    const buttonDataAtt = document.createAttribute("data-index")
-    buttonDataAtt.value = `${indexOfBook}`;
-    buttonEl.setAttributeNode(buttonDataAtt);
+    createIndexDataAtt(buttonEl,indexOfBook);
 };
 
 function addCardColor(cardEl,objectValue){
