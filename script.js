@@ -129,7 +129,7 @@ function createEditDiv(cardEl,indexOfBook){
     const contDivEl = document.createElement("div");
     contDivEl.classList.add("hflex","edit");
     cardEl.appendChild(contDivEl);
-
+    
     const pEl = document.createElement("p");
     contDivEl.appendChild(pEl);
 
@@ -140,10 +140,10 @@ function createEditDiv(cardEl,indexOfBook){
     createButtonEl("edit-button","Edit",indexOfBook,contDivEl);
 };
 
-function createButtonEl(className,textString,indexOfBook,contDivEl){
+function createButtonEl(className,textString,indexOfBook,buttonContDivEl){
     const buttonEl = document.createElement("button");
     buttonEl.classList.add(className);
-    contDivEl.appendChild(buttonEl);
+    buttonContDivEl.appendChild(buttonEl);
 
     const buttonTxt = document.createTextNode(textString);
     buttonEl.appendChild(buttonTxt);
