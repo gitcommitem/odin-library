@@ -1,13 +1,15 @@
 let bookList = [];
 
-function book(title,author,pages,volumes,language,readStatus,cardColor){
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.volumes = volumes,
-    this.language = language,
-    this.readStatus = readStatus,
-    this.cardColor = cardColor
+class book {
+    constructor(title,author,pages,volumes,language,readStatus,cardColor){
+        this.title = title,
+        this.author = author,
+        this.pages = pages,
+        this.volumes = volumes,
+        this.language = language,
+        this.readStatus = readStatus,
+        this.cardColor = cardColor
+    };
 };
 
 const bananafish = new book("Bananafish","Akimi Yoshida",null,"19","Japanese","Finished","yellow");
